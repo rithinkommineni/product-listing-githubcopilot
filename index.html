@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mr. Bookstore</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #6495ed;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .book {
+            border: 1px solid #000;
+            margin: 10px;
+            padding: 10px;
+        }
+        .book img {
+            width: 100px;
+            height: 150px;
+        }
+        footer {
+            background-color: #6495ed;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mr. Bookstore</h1>
+        <button onclick="viewCart()">View Cart</button>
+    </header>
+    <div class="book">
+        <img src="book1.jpg" alt="Book 1">
+        <h2>Book 1</h2>
+        <p>Price: $10</p>
+        <p>Summary: This is a great book about...</p>
+        <button onclick="addToCart('Book 1', 10)">Add to cart</button>
+    </div>
+    <div class="book">
+        <img src="book2.jpg" alt="Book 2">
+        <h2>Book 2</h2>
+        <p>Price: $15</p>
+        <p>Summary: This is another great book about...</p>
+        <button onclick="addToCart('Book 2', 15)">Add to cart</button>
+    </div>
+    <div class="book">
+        <img src="book3.jpg" alt="Book 3">
+        <h2>Book 3</h2>
+        <p>Price: $20</p>
+        <p>Summary: This is a fantastic book about...</p>
+        <button onclick="addToCart('Book 3', 20)">Add to cart</button>
+    </div>
+    <div class="book">
+        <img src="book4.jpg" alt="Book 4">
+        <h2>Book 4</h2>
+        <p>Price: $25</p>
+        <p>Summary: This is an amazing book about...</p>
+        <button onclick="addToCart('Book 4', 25)">Add to cart</button>
+    </div>
+    <div class="book">
+        <img src="book5.jpg" alt="Book 5">
+        <h2>Book 5</h2>
+        <p>Price: $30</p>
+        <p>Summary: This is an incredible book about...</p>
+        <button onclick="addToCart('Book 5', 30)">Add to cart</button>
+    </div>
+    <footer>
+        <p>Location: 123 Main St, Anytown, USA</p>
+        <p>Contact: 123-456-7890</p>
+    </footer>
+    <script>
+        // Initialize cart if it doesn't exist
+        if (!localStorage.getItem('cart')) {
+            localStorage.setItem('cart', JSON.stringify([]));
+        }
+
+        function addToCart(bookName, price) {
+            // Get the existing cart from localStorage
+            var cart = JSON.parse(localStorage.getItem('cart'));
+
+            // Add the new item to the cart
+            cart.push({name: bookName, price: price});
+
+            // Save the updated cart back to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            alert(bookName + ' has been added to your cart.');
+        }
+
+        function viewCart() {
+            // Get the existing cart from localStorage
+            var cart = JSON.parse(localStorage.getItem('cart'));
+
+            // Create a string to display the cart contents
+            var cartContents = 'Your cart contains:\n';
+            for (var i = 0; i < cart.length; i++) {
+                cartContents += cart[i].name + ' - $' + cart[i].price + '\n';
+            }
+
+            alert(cartContents);
+        }
+    </script>
+</body>
+</html>
